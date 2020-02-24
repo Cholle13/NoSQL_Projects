@@ -149,7 +149,7 @@ public class ComplexJoin {
 				dataStringBuilder.append(attribute_str[19]);
 				if (Integer.parseInt(attribute_str[0]) > 1899 && (!franchName.equals("") || !franchName.equals(null))) {
 					// write the franchise name and year as key and the year, homerun and franchise name as the value
-					context.write(new Text(franchName + "," + attribute_str[0]), new Text(dataStringBuilder.toString()));
+					context.write(new Text(franchName + "," + attribute_str[0] + ","), new Text(dataStringBuilder.toString()));
 				}
 				dataStringBuilder = null;
 			}
@@ -162,10 +162,8 @@ public class ComplexJoin {
   public static class FinalPlayerMapper extends Mapper<Object, Text, Text, Text> {
 	  public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
 		  String line = value.toString();
-		  // Unnecessary if HR is the only thing given from team
 		  String[] attribute_str = line.split(",");
-		  String[] key_split = key.toString().split(",");
-		  context.write(new Text(key_split[1]), new Text("Player-" + attribute_str[0] + "," + attribute_str[4]));
+		  context.write(new Text(attribute_str[1]), new Text("Player-" + attribute_str[2].trim() + "," + attribute_str[6]));
 	  }
   }
 
@@ -174,10 +172,8 @@ public class ComplexJoin {
   public static class FinalTeamMapper extends Mapper<Object, Text, Text, Text> {
 	  public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
 		  String line = value.toString();
-		  // Unnecessary if HR is the only thing given from team
-		  //String[] attribute_str = line.split(",");
-		  String[] key_split = key.toString().split(",");
-		  context.write(new Text(key_split[1]), new Text("Team-" + key_split[0] + "," + line));
+		  String[] line_split = line.toString().split(",");
+		  context.write(new Text(line_split[1]), new Text("Team-" + line_split[0] + "," + line_split[2]));
 	  }
   }
 
@@ -221,7 +217,7 @@ public class ComplexJoin {
 				if (hr.equals("")) {
 					hr = "0";
 				}
-				keyBuilder.append("," + yearID);
+				keyBuilder.append("," + yearID + ",");
 	    		}
 			// TODO: Add logic to add HR using stints in a given year
 			// Reduces to just year and stints are irrelevant moving forward
@@ -277,8 +273,8 @@ public class ComplexJoin {
 		  // 	Loop through Team hashMap(smaller)
 		  // 		if Player HR > Team HR
 		  // 			franchName playerName year
-		  private static HashMap<String, String> TeamMap = new HashMap<String, String>();
-		  private static HashMap<String, String> PlayerMap = new HashMap<String, String>();
+		  HashMap<String, String> TeamMap = new HashMap<String, String>();
+		  HashMap<String, String> PlayerMap = new HashMap<String, String>();
 
 		  String value;
 		  String[] splitValues;
@@ -291,20 +287,23 @@ public class ComplexJoin {
 			  splitValues = value.split("-");
 			  tag = splitValues[0];
 			  splitAttributes = splitValues[1].split(",");
-			  if(tag.equalsIgnoreCase("Team")) {
-				  TeamMap.put(splitAttributes[0], splitAttributes[1]);
+			  if(tag.equalsIgnoreCase("Team") && splitAttributes.length > 1) {
+				  TeamMap.put(splitAttributes[0].trim(), splitAttributes[1].trim());
 			  } else if (tag.equalsIgnoreCase("Player")) {
-				  PlayerMap.put(splitAttributes[0], splitAttributes[1]);
+				  System.out.print("Year " + year + " Player Name: " + splitAttributes[0]);
+				  System.out.println("\tPlayer HR: " + splitAttributes[1]);
+				  PlayerMap.put(splitAttributes[0].trim(), splitAttributes[1].trim());
 			  }
 		  }
 		  // Data is now loaded into HashMaps
 		  
 		  // Loop through Player HashMap
 		  for (String player : PlayerMap.keySet()) {
-			  int playerHR = PlayerMap.get(player);
-			  for (String Team : TeamMap.keySet()) {
-				  int teamHR = TeamMap.get(team);
+			  int playerHR = Integer.parseInt(PlayerMap.get(player));
+			  for (String team : TeamMap.keySet()) {
+				  int teamHR = Integer.parseInt(TeamMap.get(team));
 				  if (playerHR > teamHR) {
+					  System.out.println("Team: " + team + " Player: " + player);
 					  context.write(new Text(team), new Text(" " + player + " " + year));
 				  }
 			  }
@@ -348,7 +347,7 @@ public class ComplexJoin {
 	  job.setJarByClass(ComplexJoin.class);
 	  //job.setMapperClass(PlayerTeamMapper.class);
 	  job.setReducerClass(PlayerTeamReducer.class);
-	  job.setOutputkeyClass(Text.class);
+	  job.setOutputKeyClass(Text.class);
 	  job.setOutputValueClass(Text.class);
 	  MultipleInputs.addInputPath(job, new Path(playerInputPath), TextInputFormat.class, FinalPlayerMapper.class);
 	  MultipleInputs.addInputPath(job, new Path(teamInputPath), TextInputFormat.class, FinalTeamMapper.class);
