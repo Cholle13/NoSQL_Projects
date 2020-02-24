@@ -158,6 +158,28 @@ public class ComplexJoin {
 	}
   }	
 
+  // Player mapper for prepping for Final reducer phase
+  public static class FinalPlayerMapper extends Mapper<Object, Text, Text, Text> {
+	  public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
+		  String line = value.toString();
+		  // Unnecessary if HR is the only thing given from team
+		  String[] attribute_str = line.split(",");
+		  String[] key_split = key.toString().split(",");
+		  context.write(new Text(key_split[1]), new Text("Player-" + attribute_str[0] + "," + attribute_str[4]));
+	  }
+  }
+
+
+  // Team Mapper for prepping for Final reducer phase
+  public static class FinalTeamMapper extends Mapper<Object, Text, Text, Text> {
+	  public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
+		  String line = value.toString();
+		  // Unnecessary if HR is the only thing given from team
+		  //String[] attribute_str = line.split(",");
+		  String[] key_split = key.toString().split(",");
+		  context.write(new Text(key_split[1]), new Text("Team-" + key_split[0] + "," + line));
+	  }
+  }
 
   // Player Reducer Output to be used in another job
   public static class PlayerReducer
@@ -199,9 +221,10 @@ public class ComplexJoin {
 				if (hr.equals("")) {
 					hr = "0";
 				}
-				// Remove this to remove year from key
 				keyBuilder.append("," + yearID);
 	    		}
+			// TODO: Add logic to add HR using stints in a given year
+			// Reduces to just year and stints are irrelevant moving forward
 
 	    		if (hr != null) {
 				if (Integer.parseInt(hr) > 0) {
@@ -244,6 +267,51 @@ public class ComplexJoin {
 	  }
   }
 
+  // Final reducer for joining Players and Teams
+  public static class PlayerTeamReducer extends Reducer<Text, Text, Text, Text> {
+	  public void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException {
+		  // Have hashMap of player to hr
+		  // Have hashMap of team to hr
+		  // each value enterinng this reducer will have the same year
+		  // Loop through Player hashMap 
+		  // 	Loop through Team hashMap(smaller)
+		  // 		if Player HR > Team HR
+		  // 			franchName playerName year
+		  private static HashMap<String, String> TeamMap = new HashMap<String, String>();
+		  private static HashMap<String, String> PlayerMap = new HashMap<String, String>();
+
+		  String value;
+		  String[] splitValues;
+		  String[] splitAttributes;
+		  String tag;
+		  String year = key.toString();
+		  // Load data into HashMaps
+		  for (Text txtVal : values) {
+			  value = txtVal.toString();
+			  splitValues = value.split("-");
+			  tag = splitValues[0];
+			  splitAttributes = splitValues[1].split(",");
+			  if(tag.equalsIgnoreCase("Team")) {
+				  TeamMap.put(splitAttributes[0], splitAttributes[1]);
+			  } else if (tag.equalsIgnoreCase("Player")) {
+				  PlayerMap.put(splitAttributes[0], splitAttributes[1]);
+			  }
+		  }
+		  // Data is now loaded into HashMaps
+		  
+		  // Loop through Player HashMap
+		  for (String player : PlayerMap.keySet()) {
+			  int playerHR = PlayerMap.get(player);
+			  for (String Team : TeamMap.keySet()) {
+				  int teamHR = TeamMap.get(team);
+				  if (playerHR > teamHR) {
+					  context.write(new Text(team), new Text(" " + player + " " + year));
+				  }
+			  }
+		  }
+	  }
+  }
+
   // Get Job Info
   public static Job getPlayerJob(Configuration conf, String personInputPath, String playerInputPath, String outputPath) throws IOException {
 	  Job job = Job.getInstance(conf, "complex join");
@@ -274,6 +342,19 @@ public class ComplexJoin {
 	  return job;
   }
 
+  // Get Final job info
+  public static Job getFinalJob(Configuration conf, String playerInputPath, String teamInputPath, String outputPath) throws IOException {
+	  Job job = Job.getInstance(conf, "complex join");
+	  job.setJarByClass(ComplexJoin.class);
+	  //job.setMapperClass(PlayerTeamMapper.class);
+	  job.setReducerClass(PlayerTeamReducer.class);
+	  job.setOutputkeyClass(Text.class);
+	  job.setOutputValueClass(Text.class);
+	  MultipleInputs.addInputPath(job, new Path(playerInputPath), TextInputFormat.class, FinalPlayerMapper.class);
+	  MultipleInputs.addInputPath(job, new Path(teamInputPath), TextInputFormat.class, FinalTeamMapper.class);
+	  FileOutputFormat.setOutputPath(job, new Path(outputPath));
+	  return job;
+  }
 
   public static void main(String[] args) throws Exception {
     // Configuration stuff
@@ -287,10 +368,12 @@ public class ComplexJoin {
     String finalOutput = "/users/holle/";
     Job playerJob = getPlayerJob(conf, playerInfoInput, playerStatsInput, playerOutput);
     Job teamJob = getTeamJob(conf, teamStatsInput, teamFranchInput, teamOutput);
+    Job finalJob = getFinalJob(conf, playerOutput, teamOutput, finalOutput);
 
     playerJob.waitForCompletion(true);
+    teamJob.waitForCompletion(true);
 
-    System.exit(teamJob.waitForCompletion(true) ? 0 : 1);
+    System.exit(finalJob.waitForCompletion(true) ? 0 : 1);
   }
 }
 /*
