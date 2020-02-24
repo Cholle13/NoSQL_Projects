@@ -2,10 +2,10 @@
  * Author: Chris Holle
  * Course: NoSQL
  * Assignment: 2
- * Date: 02/20/20
+ * Date: 02/23/20
  *
- * Description: MapReduce program that calculates Runs Created
- * by each player in Batting.csv over their career.
+ * Description: MapReduce program that finds which players hit more homeruns
+ * than a team in a given year.
  */
 import java.io.IOException;
 import java.io.FileNotFoundException;
@@ -29,9 +29,10 @@ import org.apache.hadoop.mapreduce.lib.input.MultipleInputs;
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import org.apache.hadoop.filecache.DistributedCache;
+import org.apache.hadoop.fs.FileSystem;
 
 public class ComplexJoin {
-  // Mapper
+  // Player Mapper to grab player name
   public static class PlayerMapper
        extends Mapper<Object, Text, Text, Text>{
 
@@ -44,7 +45,7 @@ public class ComplexJoin {
       String[] attribute_string = line.split(",");
       // Ensure that the header is not being read
       if (!attribute_string[0].equals("playerID")) {
-      	// Setup attr int array
+      	// Setup attr int array to fix some data errors
       	String[] attr = new String[NUM_BASEBALL_ATTRIBUTES];
       	for (int i = 5; i < attr.length; i++) {
 		if (i >= attribute_string.length) {
@@ -59,43 +60,46 @@ public class ComplexJoin {
       	String player_id = attribute_string[0];
 	// Player full name used as value
 	StringBuilder dataStringBuilder = new StringBuilder();
+	// Add tag and data to value
 	dataStringBuilder.append("Person-").append(attribute_string[13] + " ").append(attribute_string[14]);
 	context.write(new Text(player_id), new Text(dataStringBuilder.toString()));
 	dataStringBuilder = null;
       }
     }
   }
+  // Player Mapper to grab player HR for a given year
   public static class PlayerDataMapper extends Mapper<Object, Text, Text, Text> {
-	final static int NUM_PLAYER_ATTRIBUTES = 22;
 	public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
 		String line = value.toString();
 		String[] attribute_str = line.split(",");
 		if (!attribute_str[0].equals("")) {
-
-		if(!attribute_str[0].equals("playerID")) {
-			String player_id = attribute_str[0];
-			StringBuilder dataStringBuilder = new StringBuilder();
-			dataStringBuilder.append("Player-");
-			// Add yearID
-		        dataStringBuilder.append(attribute_str[1].toString() + ",");
-			// Add stint
-			dataStringBuilder.append(attribute_str[2].toString() + ",");
-			// Add teamID
-			dataStringBuilder.append(attribute_str[3].toString() + ",");
-			// Add HR
-			dataStringBuilder.append(attribute_str[11].toString());
-			String dataString = dataStringBuilder.toString();
-			dataStringBuilder = null;
-			if (!attribute_str.equals("")) {
-			if (Integer.parseInt(attribute_str[1]) > 1899) {
-				context.write(new Text(player_id), new Text(dataString));
+			if(!attribute_str[0].equals("playerID")) {
+				String player_id = attribute_str[0];
+				StringBuilder dataStringBuilder = new StringBuilder();
+				dataStringBuilder.append("Player-");
+				// Add yearID
+		        	dataStringBuilder.append(attribute_str[1].toString() + ",");
+				// Add stint
+				dataStringBuilder.append(attribute_str[2].toString() + ",");
+				// Add teamID
+				dataStringBuilder.append(attribute_str[3].toString() + ",");
+				// Add HR
+				dataStringBuilder.append(attribute_str[11].toString());
+				String dataString = dataStringBuilder.toString();
+				dataStringBuilder = null;
+				if (!attribute_str.equals("")) {
+					if (Integer.parseInt(attribute_str[1]) > 1899) {
+						context.write(new Text(player_id), new Text(dataString));
+					}	
+				}
 			}
-			}
-		}
 		}
 
 	}
   }
+
+  // Team Mapper
+  // Fragment and Replicate through Map-side Join
   public static class TeamDataMapper extends Mapper<Object, Text, Text, Text> {
 	// Stores HashMap of Franchise ID to Franchise Name 
 	private static HashMap<String, String> TeamFranchMap = new HashMap<String, String>();
@@ -134,7 +138,7 @@ public class ComplexJoin {
 			e.printStackTrace();
 		} 
 	}
-
+	// Map function that joins the team data
 	public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
 		String line = value.toString();
 		context.getCounter(FLAG.RECORD_COUNT).increment(1);
@@ -148,7 +152,7 @@ public class ComplexJoin {
 				StringBuilder dataStringBuilder = new StringBuilder();
 				dataStringBuilder.append(attribute_str[19]);
 				if (Integer.parseInt(attribute_str[0]) > 1899 && (!franchName.equals("") || !franchName.equals(null))) {
-					// write the franchise name and year as key and the year, homerun and franchise name as the value
+					// write the franchise name and year as key and the HR as the value
 					context.write(new Text(franchName + "," + attribute_str[0] + ","), new Text(dataStringBuilder.toString()));
 				}
 				dataStringBuilder = null;
@@ -163,6 +167,7 @@ public class ComplexJoin {
 	  public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
 		  String line = value.toString();
 		  String[] attribute_str = line.split(",");
+		  // Setup key=year values=(playerName,HR)
 		  context.write(new Text(attribute_str[1]), new Text("Player-" + attribute_str[2].trim() + "," + attribute_str[6]));
 	  }
   }
@@ -173,6 +178,7 @@ public class ComplexJoin {
 	  public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
 		  String line = value.toString();
 		  String[] line_split = line.toString().split(",");
+		  // Setup key=year values=(Team-franchName,HR)
 		  context.write(new Text(line_split[1]), new Text("Team-" + line_split[0] + "," + line_split[2]));
 	  }
   }
@@ -191,13 +197,15 @@ public class ComplexJoin {
 	    String playerName = null;
 	    String data = null, personDetails = null, playerDetails = null;
 	    ArrayList<String> dataVals = new ArrayList<String>();
-	    // Collects user name and values
+	    // Collects player name and values
 	    for (Text txtVal : values) {
 		    value = txtVal.toString();
 		    splitValues = value.split("-");
 		    tag = splitValues[0];
+		    // If Player, add values to ArrayList
 		    if (tag.equalsIgnoreCase("Player")) {
 			    dataVals.add(splitValues[1]);
+		      // If Person, add player name to variable
 		    } else if (tag.equalsIgnoreCase("Person")) {
 			    playerName = splitValues[1];
 		    }
@@ -210,7 +218,7 @@ public class ComplexJoin {
 	    		splitAttr = playerValue.split(",");
 	    		StringBuilder keyBuilder = new StringBuilder();
 	    		keyBuilder.append(key.toString());
-	    		// Check if HR is greater than 0
+	    		// Check if HR is greater than 0 and add year to key
 	    		if (splitAttr.length > 3) {
 				yearID = splitAttr[0];
 				hr = splitAttr[3];
@@ -229,38 +237,6 @@ public class ComplexJoin {
 	    		}
 	    }
     }
-  }
-
-  // Team Reducer to be used in another job
-  public static class TeamReducer extends Reducer<Text, Text, Text, Text> {
-	  public void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException {
-		  String value;
-		  String[] splitValues;
-		  String tag;
-		  String data = null, teamDetails = null, franchDetails = null;
-		  for (Text txtVal : values) {
-			  value = txtVal.toString();
-			  splitValues = value.split("-");
-			  tag = splitValues[0];
-			  if(tag.equalsIgnoreCase("Team")) {
-				  teamDetails = splitValues[1];
-			  } else if (tag.equalsIgnoreCase("Franch")) {
-				  franchDetails = splitValues[1];
-			  }
-		  }
-
-		  if (teamDetails != null && franchDetails != null) {
-			  data = new String(teamDetails + "," + franchDetails);
-		  } else if (teamDetails == null && franchDetails != null) {
-			  data = new String(franchDetails);
-		  
-	  	  } else if (teamDetails != null && franchDetails == null) {
-		  	data = new String(teamDetails);
-		  } else {
-			  data = new String("");
-		  }
-		  context.write(key, new Text(data));
-	  }
   }
 
   // Final reducer for joining Players and Teams
@@ -284,14 +260,17 @@ public class ComplexJoin {
 		  // Load data into HashMaps
 		  for (Text txtVal : values) {
 			  value = txtVal.toString();
+			  // Split values by tag delimeter
 			  splitValues = value.split("-");
+			  // Save tag for checking
 			  tag = splitValues[0];
+			  // Split values after tag
 			  splitAttributes = splitValues[1].split(",");
+			  // If team tag save data to Team HashMap
 			  if(tag.equalsIgnoreCase("Team") && splitAttributes.length > 1) {
 				  TeamMap.put(splitAttributes[0].trim(), splitAttributes[1].trim());
+			    // If Player tag, save data to Player HashMap
 			  } else if (tag.equalsIgnoreCase("Player")) {
-				  System.out.print("Year " + year + " Player Name: " + splitAttributes[0]);
-				  System.out.println("\tPlayer HR: " + splitAttributes[1]);
 				  PlayerMap.put(splitAttributes[0].trim(), splitAttributes[1].trim());
 			  }
 		  }
@@ -300,11 +279,13 @@ public class ComplexJoin {
 		  // Loop through Player HashMap
 		  for (String player : PlayerMap.keySet()) {
 			  int playerHR = Integer.parseInt(PlayerMap.get(player));
+			  // Loop through Team HashMap
 			  for (String team : TeamMap.keySet()) {
 				  int teamHR = Integer.parseInt(TeamMap.get(team));
+				  // If player HR is greater than team HR write to context
 				  if (playerHR > teamHR) {
 					  System.out.println("Team: " + team + " Player: " + player);
-					  context.write(new Text(team), new Text(" " + player + " " + year));
+					  context.write(new Text(team + " " + player + " " + year), new Text(""));
 				  }
 			  }
 		  }
@@ -313,10 +294,10 @@ public class ComplexJoin {
 
   // Get Job Info
   public static Job getPlayerJob(Configuration conf, String personInputPath, String playerInputPath, String outputPath) throws IOException {
+	  // Player job configuration
 	  Job job = Job.getInstance(conf, "complex join");
 	  job.setJarByClass(ComplexJoin.class);
 	  job.setMapperClass(PlayerMapper.class);
-	  //job.setCombinerClass(PlayerReducer.class);
 	  job.setReducerClass(PlayerReducer.class);
 	  job.setOutputKeyClass(Text.class);
 	  job.setOutputValueClass(Text.class);
@@ -328,6 +309,7 @@ public class ComplexJoin {
   }
   // Get Team job info
   public static Job getTeamJob(Configuration conf, String inputPath, String cachePath, String outputPath) throws IOException {
+	  // Team Job Configuration
 	  Job job = Job.getInstance(conf, "complex join");
 	  job.setJarByClass(ComplexJoin.class);
 	  job.setMapperClass(TeamDataMapper.class);
@@ -345,7 +327,6 @@ public class ComplexJoin {
   public static Job getFinalJob(Configuration conf, String playerInputPath, String teamInputPath, String outputPath) throws IOException {
 	  Job job = Job.getInstance(conf, "complex join");
 	  job.setJarByClass(ComplexJoin.class);
-	  //job.setMapperClass(PlayerTeamMapper.class);
 	  job.setReducerClass(PlayerTeamReducer.class);
 	  job.setOutputKeyClass(Text.class);
 	  job.setOutputValueClass(Text.class);
@@ -354,37 +335,30 @@ public class ComplexJoin {
 	  FileOutputFormat.setOutputPath(job, new Path(outputPath));
 	  return job;
   }
-
+  // Main Driver code
   public static void main(String[] args) throws Exception {
     // Configuration stuff
     Configuration conf = new Configuration();
-    String playerInfoInput = args[0];
-    String playerStatsInput = args[1]; 
-    String playerOutput = args[2];
-    String teamStatsInput = args[3];
-    String teamFranchInput = args[4];
-    String teamOutput = args[5];
-    String finalOutput = "/users/holle/";
-    Job playerJob = getPlayerJob(conf, playerInfoInput, playerStatsInput, playerOutput);
-    Job teamJob = getTeamJob(conf, teamStatsInput, teamFranchInput, teamOutput);
-    Job finalJob = getFinalJob(conf, playerOutput, teamOutput, finalOutput);
+    // Handle given paths from command line arguments
+    if (args.length < 4) {
+	    throw new IOException("Usage: <People.csv> <Batting.csv> <Teams.csv> <TeamsFranchises.csv>"); 
+    } else {
+    	String playerInfoInput = args[0];
+    	String playerStatsInput = args[1]; 
+    	String playerOutput = "/users/holle/tmp/player/";
+    	String teamStatsInput = args[2];
+    	String teamFranchInput = args[3];
+    	String teamOutput = "/users/holle/tmp/team/";
+    	// Set output file path
+    	final String finalOutput = "/users/holle/final/";
+    	Job playerJob = getPlayerJob(conf, playerInfoInput, playerStatsInput, playerOutput);
+    	Job teamJob = getTeamJob(conf, teamStatsInput, teamFranchInput, teamOutput);
+   	Job finalJob = getFinalJob(conf, playerOutput, teamOutput, finalOutput);
 
-    playerJob.waitForCompletion(true);
-    teamJob.waitForCompletion(true);
+    	playerJob.waitForCompletion(true);
+    	teamJob.waitForCompletion(true);
 
-    System.exit(finalJob.waitForCompletion(true) ? 0 : 1);
+    	System.exit(finalJob.waitForCompletion(true) ? 0 : 1);
+    }
   }
 }
-/*
- * Setup:
- * - Join People and Batting to get Player name associated with stats
- *   	- Creates playerInfo
- * - Fragment and replicate TeamFranchises and Teams to get franchName associated with team stats
- *   	- Creates teamInfo
- * - Join playerInfo and teamInfo on year
- *   	- Where player HR > team HR
- *
- *  TODO: Setup player job configuration
- *  TODO: Setup team job configuration
- *  TODO: Chain player and team job output into Reduce side join
- */
