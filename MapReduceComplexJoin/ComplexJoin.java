@@ -168,7 +168,7 @@ public class ComplexJoin {
 		  String line = value.toString();
 		  String[] attribute_str = line.split(",");
 		  // Setup key=year values=(playerName,HR)
-		  context.write(new Text(attribute_str[1]), new Text("Player-" + attribute_str[2].trim() + "," + attribute_str[6]));
+		  context.write(new Text(attribute_str[1]), new Text("Player-" + attribute_str[2].trim() + "," + attribute_str[4]));
 	  }
   }
 
@@ -197,6 +197,8 @@ public class ComplexJoin {
 	    String playerName = null;
 	    String data = null, personDetails = null, playerDetails = null;
 	    ArrayList<String> dataVals = new ArrayList<String>();
+	    HashMap<String, Integer> stintHr = new HashMap<String, Integer>();
+
 	    // Collects player name and values
 	    for (Text txtVal : values) {
 		    value = txtVal.toString();
@@ -204,7 +206,18 @@ public class ComplexJoin {
 		    tag = splitValues[0];
 		    // If Player, add values to ArrayList
 		    if (tag.equalsIgnoreCase("Player")) {
-			    dataVals.add(splitValues[1]);
+			    // Add playerID,year as key and HR as value to HashMap
+			    String[] playerAttr = splitValues[1].split(",");
+			    if (playerAttr.length > 3) {
+			    	String stintHrKey = key.toString() + "," + playerAttr[0];
+			    	int hr = Integer.parseInt(playerAttr[3]);
+			    	if (stintHr.containsKey(stintHrKey)) {
+				    stintHr.put(stintHrKey, (stintHr.get(stintHrKey) + hr));
+			    	} else {
+				    stintHr.put(stintHrKey, hr);
+				    dataVals.add(splitValues[1]);
+			    	}
+			    }
 		      // If Person, add player name to variable
 		    } else if (tag.equalsIgnoreCase("Person")) {
 			    playerName = splitValues[1];
@@ -216,23 +229,26 @@ public class ComplexJoin {
 	    		String[] splitAttr;
 	    		String hr = null, yearID = null;
 	    		splitAttr = playerValue.split(",");
+			// StringBuilders to prepare key and value for context write
 	    		StringBuilder keyBuilder = new StringBuilder();
+			StringBuilder valBuilder = new StringBuilder();
 	    		keyBuilder.append(key.toString());
 	    		// Check if HR is greater than 0 and add year to key
 	    		if (splitAttr.length > 3) {
 				yearID = splitAttr[0];
-				hr = splitAttr[3];
+				hr = String.valueOf(stintHr.get(key.toString() + "," + yearID));
 				if (hr.equals("")) {
 					hr = "0";
 				}
+				// Add year to key
 				keyBuilder.append("," + yearID + ",");
+				// Setup value to contain player's name, year and the total hr for a year regardless of stint
+				valBuilder.append(playerName + ",").append(yearID + ",").append(hr);
 	    		}
-			// TODO: Add logic to add HR using stints in a given year
-			// Reduces to just year and stints are irrelevant moving forward
 
 	    		if (hr != null) {
 				if (Integer.parseInt(hr) > 0) {
-	    	   			context.write(new Text(keyBuilder.toString()), new Text(new String(playerName + "," + playerValue))); 
+	    	   			context.write(new Text(keyBuilder.toString()), new Text(valBuilder.toString())); 
 				}
 	    		}
 	    }
@@ -333,6 +349,7 @@ public class ComplexJoin {
 	  MultipleInputs.addInputPath(job, new Path(playerInputPath), TextInputFormat.class, FinalPlayerMapper.class);
 	  MultipleInputs.addInputPath(job, new Path(teamInputPath), TextInputFormat.class, FinalTeamMapper.class);
 	  FileOutputFormat.setOutputPath(job, new Path(outputPath));
+	  job.getConfiguration().set("mapreduce.output.basename", "Holle-out");
 	  return job;
   }
   // Main Driver code
@@ -341,7 +358,7 @@ public class ComplexJoin {
     Configuration conf = new Configuration();
     // Handle given paths from command line arguments
     if (args.length < 4) {
-	    throw new IOException("Usage: <People.csv> <Batting.csv> <Teams.csv> <TeamsFranchises.csv>"); 
+	    throw new IOException("Command Line Usage: <People.csv> <Batting.csv> <Teams.csv> <TeamsFranchises.csv>"); 
     } else {
     	String playerInfoInput = args[0];
     	String playerStatsInput = args[1]; 
