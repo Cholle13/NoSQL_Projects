@@ -258,9 +258,9 @@ public class ComplexJoin {
   // Final reducer for joining Players and Teams
   public static class PlayerTeamReducer extends Reducer<Text, Text, Text, Text> {
 	  public void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException {
-		  // Have hashMap of player to hr
-		  // Have hashMap of team to hr
-		  // each value enterinng this reducer will have the same year
+		  // Setup hashMap of player to hr
+		  // Setup hashMap of team to hr
+		  // each value in this reducer will have the same year as the key
 		  // Loop through Player hashMap 
 		  // 	Loop through Team hashMap(smaller)
 		  // 		if Player HR > Team HR
