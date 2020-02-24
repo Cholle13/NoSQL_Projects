@@ -5,7 +5,6 @@ hdfsPath=$1
 
 # Path to baseball data (Change to your filepath to baseball data)
 dataPath=$2
-#"./baseballdatabank-2019.2/core/"
 
 $hdfsPath dfs -rm -r /users/holle/
 javac -cp $(hadoop classpath) -d ./classes/ ComplexJoin.java
