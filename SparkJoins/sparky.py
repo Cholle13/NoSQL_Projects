@@ -68,25 +68,33 @@ if __name__ == "__main__":
     joinedTeams = joinedTeams.withColumn('teamKey', sf.concat(sf.col('franchID'), sf.lit(','), sf.col('yearID')))
     # Remove all data before year 1900
     joinedTeams = joinedTeams.filter(joinedTeams.yearID > '1899')
+    # Create a teamKey column for team info
     joinedTeams = joinedTeams.select(sf.col('teamKey'), sf.col('franchName'), sf.col('yearID'), sf.col('HR').alias('teamHR'))
     # Final Join to join player data with team data
     finalJoin = joinedTeams.join(joinedPlayer, joinedTeams.yearID == joinedPlayer.yearID).drop(joinedPlayer.yearID).drop(joinedPlayer.playerKey).drop(joinedTeams.teamKey)
+    # Filter out players that don't have more HRs than a team
     finalJoin = finalJoin.filter(finalJoin.teamHR.cast('float') < finalJoin.HR.cast('float'))
-    # Output the results
+    # Convert DataFrame into RDD for  
     finalOutput = finalJoin.rdd.map(list)
-    #print(finalOutput.collect())
+    # Setup the rdd by mapping to particular attributes then convert to list
     finalOutput = finalOutput.map(lambda x: (x[0], x[4], x[1])).collect()
+    # Output results
     for team, player, year in finalOutput:
         outFile.write("{} {} {}\n".format(team, player, year))
-    #print(finalJoin.filter(finalJoin.teamHR.cast('float') < finalJoin.HR.cast('float')).show(500))
 
-    # Copy local output file to hdfs
+    # Create /users/holle directory if not already created
     hdfsMkdir = Popen(['hdfs', 'dfs', '-mkdir', '-p', '/users/holle'], stdin=PIPE, bufsize=-1)
+    # Run the command
     hdfsMkdir.communicate()
+    # Create /users/holle/spark directory if not already created
     hdfsMkdir = Popen(['hdfs', 'dfs', '-mkdir', '-p', '/users/holle/spark'], stdin=PIPE, bufsize=-1)
+    # Run the command
     hdfsMkdir.communicate()
+    # Copy results over to hdfs
     hdfsMove = Popen(["hdfs", "dfs", "-put", localFileOut, hdfsFileOut], stdin=PIPE, bufsize=-1)
+    # Run command
     hdfsMove.communicate()
+    # Close the local output file
     outFile.close()
     # Delete local output file
     os.remove(localFileOut)
