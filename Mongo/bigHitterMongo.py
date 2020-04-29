@@ -101,5 +101,5 @@ hdfsMove = Popen(["hdfs", "dfs", "-put", localFileOut, hdfsFileOut], stdin=PIPE,
 # Run command
 hdfsMove.communicate()
 # Delete local output file
-#os.remove(localFileOut)
+os.remove(localFileOut)
 
