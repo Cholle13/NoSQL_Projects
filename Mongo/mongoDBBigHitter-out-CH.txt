@@ -1,0 +1,464 @@
+Cleveland Indians Sam Crawford 1901
+Cleveland Indians Nap Lajoie 1901
+Atlanta Braves Socks Seybold 1902
+Chicago Cubs Socks Seybold 1902
+Chicago Cubs Bill Bradley 1902
+Chicago Cubs Buck Freeman 1902
+Chicago Cubs Charlie Hickman 1902
+Chicago Cubs Ed Delahanty 1902
+Chicago Cubs Bill Keister 1902
+Chicago Cubs Hobe Ferris 1902
+Chicago Cubs Jimmy Williams 1902
+Chicago Cubs Nap Lajoie 1902
+Chicago White Sox Socks Seybold 1902
+San Francisco Giants Socks Seybold 1902
+San Francisco Giants Bill Bradley 1902
+San Francisco Giants Buck Freeman 1902
+San Francisco Giants Charlie Hickman 1902
+San Francisco Giants Ed Delahanty 1902
+San Francisco Giants Bill Keister 1902
+San Francisco Giants Hobe Ferris 1902
+San Francisco Giants Jimmy Williams 1902
+San Francisco Giants Nap Lajoie 1902
+Philadelphia Phillies Socks Seybold 1902
+Philadelphia Phillies Bill Bradley 1902
+Philadelphia Phillies Buck Freeman 1902
+Philadelphia Phillies Charlie Hickman 1902
+Philadelphia Phillies Ed Delahanty 1902
+Philadelphia Phillies Bill Keister 1902
+Philadelphia Phillies Hobe Ferris 1902
+Philadelphia Phillies Jimmy Williams 1902
+Philadelphia Phillies Nap Lajoie 1902
+Philadelphia Phillies Charlie Hemphill 1902
+Philadelphia Phillies Harry Davis 1902
+Philadelphia Phillies Bill Coughlin 1902
+Philadelphia Phillies Jimmy Ryan 1902
+Philadelphia Phillies Candy LaChance 1902
+Philadelphia Phillies Tommy Leach 1902
+Philadelphia Phillies Boileryard Clarke 1902
+Philadelphia Phillies Jimmy Collins 1902
+St. Louis Cardinals Socks Seybold 1902
+St. Louis Cardinals Bill Bradley 1902
+St. Louis Cardinals Buck Freeman 1902
+St. Louis Cardinals Charlie Hickman 1902
+Chicago Cubs Buck Freeman 1903
+Chicago Cubs Charlie Hickman 1903
+Detroit Tigers Buck Freeman 1903
+Philadelphia Phillies Buck Freeman 1903
+Baltimore Orioles Buck Freeman 1903
+St. Louis Cardinals Buck Freeman 1903
+St. Louis Cardinals Charlie Hickman 1903
+St. Louis Cardinals Jimmy Sheckard 1903
+St. Louis Cardinals Hobe Ferris 1903
+Chicago White Sox Harry Davis 1906
+Chicago White Sox Tim Jordan 1906
+Chicago White Sox Charlie Hickman 1906
+Chicago White Sox Harry Lumley 1906
+Chicago White Sox Cy Seymour 1906
+Detroit Tigers Harry Davis 1906
+Detroit Tigers Tim Jordan 1906
+St. Louis Cardinals Harry Davis 1906
+St. Louis Cardinals Tim Jordan 1906
+Chicago White Sox Dave Brain 1907
+Chicago White Sox Harry Lumley 1907
+Chicago White Sox Harry Davis 1907
+Chicago White Sox Red Murray 1907
+Chicago White Sox Honus Wagner 1907
+Chicago White Sox Tim Jordan 1908
+Chicago White Sox Honus Wagner 1908
+Chicago White Sox Red Murray 1908
+Chicago White Sox Sam Crawford 1908
+Chicago White Sox Mike Donlin 1908
+Chicago White Sox Bill Hinchman 1908
+Chicago White Sox Joe Tinker 1908
+Chicago White Sox Harry Davis 1908
+Chicago White Sox George Stone 1908
+Chicago White Sox Cy Seymour 1908
+Chicago White Sox Ed Konetchy 1908
+Chicago White Sox Tommy Leach 1908
+Chicago White Sox Harry Niles 1908
+Chicago White Sox Danny Murphy 1908
+Chicago White Sox John Hummel 1908
+Chicago White Sox Topsy Hartsel 1908
+Chicago White Sox Hans Lobert 1908
+Chicago White Sox Johnny Kling 1908
+Chicago White Sox Jimmy Williams 1908
+Chicago White Sox Simon Nicholls 1908
+Chicago White Sox Ty Cobb 1908
+Chicago White Sox Harry Lumley 1908
+Philadelphia Phillies Tim Jordan 1908
+Minnesota Twins Tim Jordan 1908
+Minnesota Twins Honus Wagner 1908
+Chicago White Sox Ty Cobb 1909
+Chicago White Sox Tris Speaker 1909
+Chicago White Sox Red Murray 1909
+Chicago White Sox Jake Stahl 1909
+Chicago White Sox Tommy Leach 1909
+Chicago White Sox Larry Doyle 1909
+Chicago White Sox Sam Crawford 1909
+Chicago White Sox Beals Becker 1909
+Chicago White Sox Honus Wagner 1909
+Chicago White Sox Danny Murphy 1909
+Cleveland Indians Jake Stahl 1910
+Cleveland Indians Frank Schulte 1910
+Cleveland Indians Fred Beck 1910
+Chicago White Sox Jake Stahl 1910
+Chicago White Sox Frank Schulte 1910
+Chicago White Sox Fred Beck 1910
+Chicago White Sox Jake Daubert 1910
+Chicago White Sox Ty Cobb 1910
+Chicago White Sox Larry Doyle 1910
+Chicago White Sox Duffy Lewis 1910
+Minnesota Twins Jake Stahl 1910
+Minnesota Twins Frank Schulte 1910
+Minnesota Twins Fred Beck 1910
+Chicago White Sox Frank Schulte 1911
+Cleveland Indians Frank Schulte 1911
+Baltimore Orioles Frank Schulte 1911
+Minnesota Twins Frank Schulte 1911
+Cleveland Indians Heinie Zimmerman 1912
+Boston Red Sox Gavvy Cravath 1913
+Boston Red Sox Fred Luderus 1913
+Cleveland Indians Gavvy Cravath 1913
+Cleveland Indians Fred Luderus 1913
+New York Yankees Gavvy Cravath 1913
+New York Yankees Fred Luderus 1913
+New York Yankees Vic Saier 1913
+New York Yankees Home Run Baker 1913
+New York Yankees Sherry Magee 1913
+New York Yankees Chief Wilson 1913
+New York Yankees Sam Crawford 1913
+New York Yankees Heinie Zimmerman 1913
+New York Yankees Frank Schulte 1913
+New York Yankees Beals Becker 1913
+Baltimore Orioles Gavvy Cravath 1913
+St. Louis Cardinals Gavvy Cravath 1913
+St. Louis Cardinals Fred Luderus 1913
+Boston Red Sox Gavvy Cravath 1914
+Cincinnati Reds Gavvy Cravath 1914
+Cincinnati Reds Vic Saier 1914
+Cleveland Indians Gavvy Cravath 1914
+Cleveland Indians Vic Saier 1914
+Cleveland Indians Dutch Zwilling 1914
+Cleveland Indians Duke Kenworthy 1914
+Cleveland Indians Sherry Magee 1914
+Cleveland Indians Steve Evans 1914
+Cleveland Indians Fred Luderus 1914
+Cleveland Indians Charlie Hanford 1914
+Cleveland Indians Fred Beck 1914
+Cleveland Indians Ed Lennox 1914
+Pittsburgh Pirates Gavvy Cravath 1914
+New York Yankees Gavvy Cravath 1914
+New York Yankees Vic Saier 1914
+New York Yankees Dutch Zwilling 1914
+New York Yankees Duke Kenworthy 1914
+New York Yankees Sherry Magee 1914
+Baltimore Orioles Gavvy Cravath 1914
+Baltimore Orioles Vic Saier 1914
+Minnesota Twins Gavvy Cravath 1914
+Boston Red Sox Gavvy Cravath 1915
+Boston Red Sox Hal Chase 1915
+Atlanta Braves Gavvy Cravath 1915
+Los Angeles Dodgers Gavvy Cravath 1915
+Los Angeles Dodgers Hal Chase 1915
+Cincinnati Reds Gavvy Cravath 1915
+Cincinnati Reds Hal Chase 1915
+Cleveland Indians Gavvy Cravath 1915
+Newark Pepper Gavvy Cravath 1915
+Detroit Tigers Gavvy Cravath 1915
+Oakland Athletics Gavvy Cravath 1915
+Oakland Athletics Hal Chase 1915
+Pittsburgh Rebels Gavvy Cravath 1915
+Baltimore Orioles Gavvy Cravath 1915
+St. Louis Terriers Gavvy Cravath 1915
+St. Louis Cardinals Gavvy Cravath 1915
+Minnesota Twins Gavvy Cravath 1915
+Minnesota Twins Hal Chase 1915
+Minnesota Twins Dutch Zwilling 1915
+Minnesota Twins Cy Williams 1915
+Pittsburgh Pirates Dave Robertson 1917
+Pittsburgh Pirates Gavvy Cravath 1917
+Minnesota Twins Dave Robertson 1917
+Minnesota Twins Gavvy Cravath 1917
+Minnesota Twins Wally Pipp 1917
+Minnesota Twins Bobby Veach 1917
+Minnesota Twins Rogers Hornsby 1917
+Minnesota Twins Ping Bodie 1917
+Minnesota Twins Home Run Baker 1917
+Minnesota Twins Ty Cobb 1917
+Minnesota Twins Larry Doyle 1917
+Minnesota Twins Jim Hickman 1917
+Minnesota Twins Happy Felsch 1917
+Minnesota Twins Casey Stengel 1917
+Minnesota Twins Tim Hendryx 1917
+Minnesota Twins Cy Williams 1917
+Minnesota Twins George Burns 1917
+Minnesota Twins Heinie Zimmerman 1917
+Minnesota Twins Shoeless Joe Jackson 1917
+Minnesota Twins Harry Heilmann 1917
+Minnesota Twins Fred Luderus 1917
+Minnesota Twins Benny Kauff 1917
+Minnesota Twins Walton Cruise 1917
+Los Angeles Dodgers Tillie Walker 1918
+Los Angeles Dodgers Babe Ruth 1918
+Chicago White Sox Tillie Walker 1918
+Chicago White Sox Babe Ruth 1918
+Cleveland Indians Tillie Walker 1918
+Cleveland Indians Babe Ruth 1918
+Baltimore Orioles Tillie Walker 1918
+Baltimore Orioles Babe Ruth 1918
+Baltimore Orioles Gavvy Cravath 1918
+Baltimore Orioles George Burns 1918
+Baltimore Orioles Home Run Baker 1918
+Baltimore Orioles Cy Williams 1918
+Baltimore Orioles Walton Cruise 1918
+Minnesota Twins Tillie Walker 1918
+Minnesota Twins Babe Ruth 1918
+Minnesota Twins Gavvy Cravath 1918
+Minnesota Twins George Burns 1918
+Minnesota Twins Home Run Baker 1918
+Minnesota Twins Cy Williams 1918
+Minnesota Twins Walton Cruise 1918
+Minnesota Twins Rogers Hornsby 1918
+Minnesota Twins Edd Roush 1918
+Minnesota Twins George Cutshaw 1918
+Minnesota Twins Smoky Joe Wood 1918
+Minnesota Twins Harry Heilmann 1918
+Minnesota Twins Fred Luderus 1918
+Los Angeles Dodgers Babe Ruth 1919
+Atlanta Braves Babe Ruth 1919
+Chicago Cubs Babe Ruth 1919
+Chicago White Sox Babe Ruth 1919
+Detroit Tigers Babe Ruth 1919
+Cincinnati Reds Babe Ruth 1919
+Cleveland Indians Babe Ruth 1919
+Pittsburgh Pirates Babe Ruth 1919
+St. Louis Cardinals Babe Ruth 1919
+Minnesota Twins Babe Ruth 1919
+Boston Red Sox Babe Ruth 1920
+Los Angeles Dodgers Babe Ruth 1920
+Cincinnati Reds Babe Ruth 1920
+Cincinnati Reds George Sisler 1920
+Cleveland Indians Babe Ruth 1920
+Chicago White Sox Babe Ruth 1920
+Atlanta Braves Babe Ruth 1920
+Chicago Cubs Babe Ruth 1920
+San Francisco Giants Babe Ruth 1920
+Detroit Tigers Babe Ruth 1920
+Oakland Athletics Babe Ruth 1920
+Pittsburgh Pirates Babe Ruth 1920
+Pittsburgh Pirates George Sisler 1920
+Pittsburgh Pirates Tillie Walker 1920
+Baltimore Orioles Babe Ruth 1920
+St. Louis Cardinals Babe Ruth 1920
+Minnesota Twins Babe Ruth 1920
+Boston Red Sox Babe Ruth 1921
+Boston Red Sox Bob Meusel 1921
+Boston Red Sox Ken Williams 1921
+Boston Red Sox High Pockets Kelly 1921
+Boston Red Sox Tillie Walker 1921
+Boston Red Sox Rogers Hornsby 1921
+Boston Red Sox Harry Heilmann 1921
+Boston Red Sox Cy Williams 1921
+Chicago White Sox Babe Ruth 1921
+Chicago Cubs Babe Ruth 1921
+Cincinnati Reds Babe Ruth 1921
+Cincinnati Reds Bob Meusel 1921
+Cincinnati Reds Ken Williams 1921
+Cincinnati Reds High Pockets Kelly 1921
+Cincinnati Reds Tillie Walker 1921
+Cincinnati Reds Rogers Hornsby 1921
+Cleveland Indians Babe Ruth 1921
+Detroit Tigers Babe Ruth 1921
+Pittsburgh Pirates Babe Ruth 1921
+Minnesota Twins Babe Ruth 1921
+Atlanta Braves Rogers Hornsby 1922
+Atlanta Braves Ken Williams 1922
+Atlanta Braves Tillie Walker 1922
+Atlanta Braves Babe Ruth 1922
+Cleveland Indians Rogers Hornsby 1922
+Cleveland Indians Ken Williams 1922
+Cleveland Indians Tillie Walker 1922
+Cleveland Indians Babe Ruth 1922
+Atlanta Braves Cy Williams 1923
+Atlanta Braves Babe Ruth 1923
+Boston Red Sox Cy Williams 1923
+Boston Red Sox Babe Ruth 1923
+Minnesota Twins Cy Williams 1923
+Minnesota Twins Babe Ruth 1923
+Minnesota Twins Ken Williams 1923
+Chicago White Sox Babe Ruth 1924
+Boston Red Sox Babe Ruth 1924
+Atlanta Braves Babe Ruth 1924
+Atlanta Braves Jack Fournier 1924
+Atlanta Braves Joe Hauser 1924
+Detroit Tigers Babe Ruth 1924
+Cincinnati Reds Babe Ruth 1924
+Cleveland Indians Babe Ruth 1924
+Pittsburgh Pirates Babe Ruth 1924
+Minnesota Twins Babe Ruth 1924
+Minnesota Twins Jack Fournier 1924
+Minnesota Twins Joe Hauser 1924
+Minnesota Twins Rogers Hornsby 1924
+Minnesota Twins Cy Williams 1924
+Chicago White Sox Rogers Hornsby 1925
+Boston Red Sox Babe Ruth 1926
+Los Angeles Dodgers Babe Ruth 1926
+Atlanta Braves Babe Ruth 1926
+Atlanta Braves Hack Wilson 1926
+Atlanta Braves Jim Bottomley 1926
+Atlanta Braves Al Simmons 1926
+Atlanta Braves Cy Williams 1926
+Atlanta Braves Tony Lazzeri 1926
+Atlanta Braves Goose Goslin 1926
+Atlanta Braves Les Bell 1926
+Atlanta Braves Ken Williams 1926
+Chicago White Sox Babe Ruth 1926
+Cincinnati Reds Babe Ruth 1926
+Detroit Tigers Babe Ruth 1926
+Cleveland Indians Babe Ruth 1926
+Pittsburgh Pirates Babe Ruth 1926
+Minnesota Twins Babe Ruth 1926
+Los Angeles Dodgers Babe Ruth 1927
+Los Angeles Dodgers Lou Gehrig 1927
+Atlanta Braves Babe Ruth 1927
+Atlanta Braves Lou Gehrig 1927
+Boston Red Sox Babe Ruth 1927
+Boston Red Sox Lou Gehrig 1927
+Boston Red Sox Cy Williams 1927
+Boston Red Sox Hack Wilson 1927
+Chicago White Sox Babe Ruth 1927
+Chicago White Sox Lou Gehrig 1927
+Cincinnati Reds Babe Ruth 1927
+Cincinnati Reds Lou Gehrig 1927
+Cincinnati Reds Cy Williams 1927
+Cincinnati Reds Hack Wilson 1927
+Cleveland Indians Babe Ruth 1927
+Cleveland Indians Lou Gehrig 1927
+Cleveland Indians Cy Williams 1927
+Cleveland Indians Hack Wilson 1927
+Detroit Tigers Babe Ruth 1927
+Philadelphia Phillies Babe Ruth 1927
+Oakland Athletics Babe Ruth 1927
+Pittsburgh Pirates Babe Ruth 1927
+Baltimore Orioles Babe Ruth 1927
+Minnesota Twins Babe Ruth 1927
+Minnesota Twins Lou Gehrig 1927
+Minnesota Twins Cy Williams 1927
+Minnesota Twins Hack Wilson 1927
+Boston Red Sox Babe Ruth 1928
+Atlanta Braves Babe Ruth 1928
+Chicago White Sox Babe Ruth 1928
+Chicago White Sox Jim Bottomley 1928
+Chicago White Sox Hack Wilson 1928
+Chicago White Sox Chick Hafey 1928
+Chicago White Sox Lou Gehrig 1928
+Chicago White Sox Del Bissonette 1928
+Cincinnati Reds Babe Ruth 1928
+Cleveland Indians Babe Ruth 1928
+Pittsburgh Pirates Babe Ruth 1928
+Minnesota Twins Babe Ruth 1928
+Boston Red Sox Babe Ruth 1929
+Boston Red Sox Chuck Klein 1929
+Boston Red Sox Mel Ott 1929
+Boston Red Sox Rogers Hornsby 1929
+Boston Red Sox Hack Wilson 1929
+Boston Red Sox Lou Gehrig 1929
+Boston Red Sox Al Simmons 1929
+Boston Red Sox Jimmie Foxx 1929
+Boston Red Sox Lefty O'Doul 1929
+Boston Red Sox Don Hurst 1929
+Boston Red Sox Chick Hafey 1929
+Boston Red Sox Jim Bottomley 1929
+Atlanta Braves Babe Ruth 1929
+Atlanta Braves Chuck Klein 1929
+Atlanta Braves Mel Ott 1929
+Atlanta Braves Rogers Hornsby 1929
+Atlanta Braves Hack Wilson 1929
+Atlanta Braves Lou Gehrig 1929
+Atlanta Braves Al Simmons 1929
+Cincinnati Reds Babe Ruth 1929
+Cincinnati Reds Chuck Klein 1929
+Cincinnati Reds Mel Ott 1929
+Cincinnati Reds Rogers Hornsby 1929
+Cincinnati Reds Hack Wilson 1929
+Cincinnati Reds Lou Gehrig 1929
+Chicago White Sox Babe Ruth 1929
+Chicago White Sox Chuck Klein 1929
+Chicago White Sox Mel Ott 1929
+Chicago White Sox Rogers Hornsby 1929
+Chicago White Sox Hack Wilson 1929
+Boston Red Sox Hack Wilson 1930
+Boston Red Sox Babe Ruth 1930
+Boston Red Sox Lou Gehrig 1931
+Boston Red Sox Babe Ruth 1931
+Atlanta Braves Lou Gehrig 1931
+Atlanta Braves Babe Ruth 1931
+Chicago White Sox Lou Gehrig 1931
+Chicago White Sox Babe Ruth 1931
+Chicago White Sox Earl Averill 1931
+Chicago White Sox Chuck Klein 1931
+Chicago White Sox Jimmie Foxx 1931
+Chicago White Sox Mel Ott 1931
+Cincinnati Reds Lou Gehrig 1931
+Cincinnati Reds Babe Ruth 1931
+Cincinnati Reds Earl Averill 1931
+Cincinnati Reds Chuck Klein 1931
+Cincinnati Reds Jimmie Foxx 1931
+Cincinnati Reds Mel Ott 1931
+Cincinnati Reds Goose Goslin 1931
+Cincinnati Reds Al Simmons 1931
+Detroit Tigers Lou Gehrig 1931
+Detroit Tigers Babe Ruth 1931
+Pittsburgh Pirates Lou Gehrig 1931
+Pittsburgh Pirates Babe Ruth 1931
+Boston Red Sox Jimmie Foxx 1932
+Chicago White Sox Jimmie Foxx 1932
+Chicago White Sox Babe Ruth 1932
+Chicago White Sox Mel Ott 1932
+Chicago White Sox Chuck Klein 1932
+Cincinnati Reds Jimmie Foxx 1932
+Pittsburgh Pirates Jimmie Foxx 1932
+Chicago White Sox Jimmie Foxx 1933
+Cincinnati Reds Jimmie Foxx 1933
+Pittsburgh Pirates Jimmie Foxx 1933
+Minnesota Twins Jimmie Foxx 1935
+Minnesota Twins Hank Greenberg 1935
+Minnesota Twins Wally Berger 1935
+Los Angeles Dodgers Lou Gehrig 1936
+Los Angeles Dodgers Hal Trosky 1936
+Los Angeles Dodgers Jimmie Foxx 1936
+Los Angeles Dodgers Joe DiMaggio 1937
+Los Angeles Dodgers Hank Greenberg 1937
+Atlanta Braves Hank Greenberg 1938
+Philadelphia Phillies Hank Greenberg 1938
+Philadelphia Phillies Jimmie Foxx 1938
+Chicago White Sox Ted Williams 1942
+Chicago White Sox Mel Ott 1942
+Chicago White Sox Chet Laabs 1942
+Chicago White Sox Dolph Camilli 1942
+Chicago White Sox Charlie Keller 1942
+Chicago White Sox Johnny Mize 1942
+Oakland Athletics Ted Williams 1942
+Chicago White Sox Rudy York 1943
+Oakland Athletics Rudy York 1943
+Oakland Athletics Charlie Keller 1943
+Oakland Athletics Bill Nicholson 1943
+Chicago White Sox Bill Nicholson 1944
+Chicago White Sox Mel Ott 1944
+Chicago White Sox Tommy Holmes 1945
+Chicago White Sox Chuck Workman 1945
+Chicago White Sox Vern Stephens 1945
+Minnesota Twins Tommy Holmes 1945
+Chicago White Sox Hank Greenberg 1946
+Chicago White Sox Ted Williams 1946
+Oakland Athletics Hank Greenberg 1946
+Minnesota Twins Ralph Kiner 1947
+Minnesota Twins Johnny Mize 1947
+Minnesota Twins Ralph Kiner 1948
+Minnesota Twins Johnny Mize 1948
+Minnesota Twins Stan Musial 1948
+Minnesota Twins Joe DiMaggio 1948
+Minnesota Twins Hank Sauer 1948
+Minnesota Twins Joe Gordon 1948
+Chicago White Sox Ralph Kiner 1949
